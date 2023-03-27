@@ -36,6 +36,22 @@
                         text="Show search options"
                     />
                 </div>
+                <div class="flex w-32 justify-between items-center ml-6">
+                    <IconComponent 
+                        iconString="cog"
+                        iconColor="#636363"
+                        :iconSize="19"
+                        hoverColor="hover:bg-gray-200"
+                        text="Settings"
+                    />
+                    <IconComponent 
+                        iconString="apps"
+                        iconColor="#636363"
+                        :iconSize="19"
+                        hoverColor="hover:bg-gray-200"
+                        text="Google apps"
+                    />
+                </div>
             </div>
         </div>
     </div>

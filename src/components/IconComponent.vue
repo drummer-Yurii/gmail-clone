@@ -12,8 +12,8 @@
     <div 
       :id="`tooltip-no-arrow-${iconString}`"
       role="tooltip"
-      class="inline-block absolute invisible text-xs z-10 py-1 px-2 font-medium text-white rounded-sm
-      shadow-sm opacity-0 tooltip dark:bg-gray-600 delay-150"
+      class="inline-block absolute invisible text-xs z-10 py-1 px-2 font-medium text-white 
+      rounded-sm shadow-sm opacity-0 tooltip dark:bg-gray-600 delay-150"
     >
       {{ text }}
     </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { toRefs, defineProps } from 'vue';
+import { defineProps, toRefs } from 'vue';
 import MenuIcon from 'vue-material-design-icons/Menu.vue';
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue';
 import TuneIcon from 'vue-material-design-icons/Tune.vue';

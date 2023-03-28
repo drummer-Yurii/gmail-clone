@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex w-full">
+        <div class="flex w-full justify-between">
             <div id="SideMenu" class="side-menu">
                 <div
                     class="flex items-center justify-center bg-sky-200 w-36 h-8 mt-2 rounded-2xl ml-2 p-7 cursor-pointer"
@@ -102,6 +102,31 @@
                     </div>
                 </div>
             </div>
+
+            <!-- this is  where  the page changes -->
+            <router-view />
+            <!-- this is  where  the page changes -->
+
+            <div class="m-4">
+                <div class="w-6 h-6 flex justify-center mb-7">
+                    <img class="object-center" src="img/GoogleCalendar.png" alt="">
+                </div>
+                <div class="w-6 h-6 flex justify-center mb-7">
+                    <img class="object-center" src="img/GoogleKeep.png" alt="">
+                </div>
+                <div class="w-6 h-6 flex justify-center mb-7">
+                    <img class="object-center" src="img/GoogleTasks.png" alt="">
+                </div>
+                <div class="w-6 h-6 flex justify-center mb-7">
+                    <img class="object-center" src="img/GoogleContacts.png" alt="">
+                </div>
+
+                <div class="w-6 flex mb-7 border border-gray-300"></div>
+
+                <div class="w-6 h-6 flex justify-center mb-7">
+                    <PlusIcon />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -115,6 +140,7 @@ import StarOutlineIcon from 'vue-material-design-icons/StarOutline.vue';
 import ClockOutlineIcon from 'vue-material-design-icons/ClockOutline.vue';
 import SendOutlineIcon from 'vue-material-design-icons/SendOutline.vue';
 import FileOutlineIcon from 'vue-material-design-icons/FileOutline.vue';
+import PlusIcon from 'vue-material-design-icons/Plus.vue';
 </script>
 
 <style lang="scss">

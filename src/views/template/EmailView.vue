@@ -58,6 +58,7 @@
         <div class="flex w-full justify-between">
             <div id="SideMenu" class="side-menu">
                 <div
+                    @click="newMessageOpen = !newMessageOpen"
                     class="flex items-center justify-center bg-sky-200 w-36 h-8 mt-2 rounded-2xl ml-2 p-7 cursor-pointer"
                 >
                     <PencilOutlineIcon :size="25" class="mr-4" />
@@ -128,10 +129,60 @@
                 </div>
             </div>
         </div>
+
+        <div
+            v-if="newMessageOpen"
+            id="NewMessageSection"
+            class="absolute bottom-0 right-0 mr-20 rounded-t-lg shadow-2xl bg-white"
+        >
+            <div
+                class="flex items-center justify-between rounded-t-lg w-full text-sm px-3.5 py-2.5 bg-gray-200"
+            >
+                <div>New Message</div>
+                <CloseIcon @click="newMessageOpen = false" class="cursor-pointer" :size="19" />
+            </div>
+
+            <div>
+                <div class="relative flex items-center px-3.5 py-2">
+                    <div class="text-sm text-gray-700">To</div>
+                    <input
+                        class="w-full h-6 border-transparent border-none focus:ring-0 outline-none" 
+                        type="text"
+                    >
+                    <div class="absolute border-b w-[calc(100%-30px)] bottom-0"></div>
+                </div>
+                <div class="relative flex items-center px-3.5 py-2">
+                    <div class="text-sm text-gray-700">Subject</div>
+                    <input
+                        class="w-full h-6 border-transparent border-none focus:ring-0 outline-none" 
+                        type="text"
+                    >
+                    <div class="absolute border-b w-[calc(100%-30px)] bottom-0"></div>
+                </div>
+            </div>
+
+            <div class="m-3">
+                <textarea 
+                    style="resize:none"
+                    class="w-full border-transparent border-none focus:ring-0 outline-none"
+                    rows="14"
+                >
+                </textarea>
+            </div>
+
+            <div class="p-4 mt-5">
+                <button
+                    class="bg-blue-700 hover:bg-blue-600 text-white text-sm bont-bold py-2 px-4 rounded-full"
+                >
+                    Send Message
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import IconComponent from '@/components/IconComponent.vue';
 import UserComponent from '@/components/UserComponent.vue';
 import PencilOutlineIcon from 'vue-material-design-icons/PencilOutline.vue';
@@ -141,6 +192,9 @@ import ClockOutlineIcon from 'vue-material-design-icons/ClockOutline.vue';
 import SendOutlineIcon from 'vue-material-design-icons/SendOutline.vue';
 import FileOutlineIcon from 'vue-material-design-icons/FileOutline.vue';
 import PlusIcon from 'vue-material-design-icons/Plus.vue';
+import CloseIcon from 'vue-material-design-icons/Close.vue';
+
+let newMessageOpen = ref(false);
 </script>
 
 <style lang="scss">
@@ -157,5 +211,10 @@ import PlusIcon from 'vue-material-design-icons/Plus.vue';
     .side-menu-item {
         width: 250px;
     }
-} 
+}
+
+#NewMessageSection {
+    width: 560px;
+    height: 570px;
+}
 </style>

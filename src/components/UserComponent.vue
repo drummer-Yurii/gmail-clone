@@ -4,7 +4,7 @@
             @click="openMenu = !openMenu"
             data-tooltip-target="tooltip-no-arrow-user"
             data-tooltip-placement="bottom"
-            src="https://via.placeholder.com/40"
+            :src="userStore.picture"
             class="rounded-full w-8 cursor-pointer"
         >
         <div
@@ -16,9 +16,9 @@
         >
             <div>Google Account</div>
             <div class="text-gray-500">
-                John Doe
+                {{ userStore.firstName }} {{ userStore.lastName }}
             </div>
-            <div class="text-gray-500">john.doe@mail.com</div>
+            <div class="text-gray-500">{{ userStore.email }}</div>
         </div>
         <div 
             v-show="openMenu"
@@ -26,15 +26,15 @@
         >
             <div class="w-full flex justify-center">
                 <img 
-                    src="https://via.placeholder.com/70"
+                    :src="userStore.picture"
                     class="rounded-full w-20 mt-4"
                 >
             </div>
             <div class="text-gray-700 w-full flex justify-center mt-2 text-lg">
-                John Doe
+                {{ userStore.firstName }} {{ userStore.lastName }}
             </div>
             <div class="text-gray-700 w-full flex justify-center mt-2 text-sm pb-4 border-b">
-                john.doe@mail.com
+                {{ userStore.email }}
             </div>
             <div class="flex justify-center my-5">
                 <button
@@ -50,6 +50,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useUserStore } from "@/store/user-store";
+
+const userStore = useUserStore();
 
 let openMenu = ref(false);
 </script>

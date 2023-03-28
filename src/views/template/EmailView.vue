@@ -65,19 +65,21 @@
                     <span class="text-sm">Compose</span>
                 </div>
                 <div class="my-5"></div>
-                <div
-                    class="side-menu-item flex justify-between px-6 py-1.5 bg-blue-100 rounded-r-full"
-                >
-                    <div class="flex items-center">
-                        <InboxIcon :size="17" />
-                        <div class="text-sm pl-4 font-semibold">
-                            Inbox
+                <router-link to="/email">
+                    <div
+                        class="side-menu-item flex justify-between px-6 py-1.5 bg-blue-100 rounded-r-full"
+                    >
+                        <div class="flex items-center">
+                            <InboxIcon :size="17" />
+                            <div class="text-sm pl-4 font-semibold">
+                                Inbox
+                            </div>
+                        </div>
+                        <div class="text-xs font-semibold">
+                            26
                         </div>
                     </div>
-                    <div class="text-xs font-semibold">
-                        26
-                    </div>
-                </div>
+                </router-link>
                 <div class="flex justify-between px-6 py-1.5">
                     <div class="flex items-center">
                         <StarOutlineIcon :size="17" />

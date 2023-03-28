@@ -38,6 +38,7 @@
             </div>
             <div class="flex justify-center my-5">
                 <button
+                    @click="logout"
                     class="bg-transparent text-xs hover:bg-gray-100 text-gray-600 font-semibold py-2 px-4
                     border border-gray-300 rounded"
                 >
@@ -50,9 +51,16 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/user-store";
 
+const router = useRouter();
 const userStore = useUserStore();
 
 let openMenu = ref(false);
+
+const logout = () => {
+    userStore.clearUser()
+    setTimeout(() => { router.push('/') }, 200)
+}
 </script>

@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import MessageView from '../views/MessageView.vue'
 import LoginView from '../views/LoginView.vue'
 import EmailView from '../views/template/EmailView.vue'
+import { useUserStore } from '@/store/user-store'
 
 const routes = [
   {
@@ -11,6 +12,9 @@ const routes = [
   },
   {
     path: '/email',
+    beforeEnter: (to, from, next) => {
+      useUserStore().email ? next() : next('/')
+    },
     component: EmailView,
     children: [
       {

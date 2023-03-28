@@ -16,9 +16,19 @@
         <div class="text-xs text-gray-500">1-50 of 153</div>
       </div>
     </div>
+
+    <div>
+      <MessageRow 
+        from="john.doe@mail.com"
+        subject="Test row 1"
+        body="this is the body text"
+        time="Jun 20 15:15"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import IconComponent from '@/components/IconComponent.vue';
+import MessageRow from '@/components/MessageRow.vue';
 </script>

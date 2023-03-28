@@ -1,5 +1,5 @@
 <template>
-  <div id="IconComponent" class="hello">
+  <div id="IconComponent" v-if="iconString">
     <div 
       class="flex items-center justify-center rounded-full cursor-pointer w-10 h-10"
       :class="[hoverColor]"
@@ -12,7 +12,7 @@
     <div 
       :id="`tooltip-no-arrow-${iconString}`"
       role="tooltip"
-      class="inline-block absolute invisible text-xs z-10 py-1 px-2 font-medium text-white 
+      class="inline-block absolute invisible text-xs z-10 py-1 px-2 font-medium text-black 
       rounded-sm shadow-sm opacity-0 tooltip dark:bg-gray-600 delay-150"
     >
       {{ text }}

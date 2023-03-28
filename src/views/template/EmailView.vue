@@ -14,7 +14,7 @@
                 <img width="107" src="../../../public/img/GmailLogo.png" alt="">
             </div>
             <div class="flex w-full justify-between">
-                <div class="w-full bg-gray-200 flex items-center p-1 px-2 rounded-lg">
+                <div class="input-width w-full bg-gray-200 flex items-center p-1 px-2 rounded-lg">
                     <IconComponent 
                         iconString="magnify"
                         iconColor="#636363"
@@ -51,6 +51,7 @@
                         hoverColor="hover:bg-gray-200"
                         text="Google apps"
                     />
+                    <UserComponent />
                 </div>
             </div>
         </div>
@@ -59,12 +60,16 @@
 
 <script setup>
 import IconComponent from '@/components/IconComponent.vue';
+import UserComponent from '@/components/UserComponent.vue';
 </script>
 
 <style lang="scss">
 #EmailView {
     .logo-section {
         min-width: 250px;
+    }
+    .input-width {
+        max-width: 700px;
     }
 } 
 </style>

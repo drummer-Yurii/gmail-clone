@@ -22,7 +22,7 @@
         </div>
         <div 
             v-show="openMenu"
-            class="absolute z-10 w-80 right-2 bg-white top-14 rounded-lg"
+            class="absolute z-10 w-80 right-2 bg-white top-14 rounded-lg custom-shadow"
         >
             <div class="w-full flex justify-center">
                 <img 
@@ -64,3 +64,13 @@ const logout = () => {
     setTimeout(() => { router.push('/') }, 200)
 }
 </script>
+
+<style lang="scss">
+#UserComponent {
+    .custom-shadow {
+        box-shadow: -1px 1px 6px -2px rgba(36, 36, 36, 0.58);
+        -webkit-box-shadow: -1px 1px 6px -2px rgba(36, 36, 36, 0.58);
+        -moz-box-shadow: -1px 1px 6px -2px rgba(36, 36, 36, 0.58);
+    }
+}
+</style>

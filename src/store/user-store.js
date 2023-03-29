@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { v4 as uuid } from 'uuid'
+import { collection, query, where, onSnapshot, doc, setDoc } from "firebase/firestore";
 import { db } from '@/firebase-init'
 
 axios.defaults.baseURL = 'http://localhost:4001/'
@@ -39,7 +40,24 @@ export const useUserStore = defineStore('user', {
             });
         },
 
-       async getUserDetailsFromGoogle(data) {
+        async sendEmail(data) {
+            try {
+                await setDoc(doc(db, "emails/" + uuid()), {
+                    firstName: this.$state.firstName,
+                    lastName: this.$state.lastName,
+                    fromEmail: this.$state.email,
+                    toEmail: data.toEmail,
+                    subject: data.subject,
+                    body: data.body,
+                    hasViewed: false,
+                    createdAt: Date.now()
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async getUserDetailsFromGoogle(data) {
             let res = await axios.post('api/google-login', {
                 token: data.credential
             })

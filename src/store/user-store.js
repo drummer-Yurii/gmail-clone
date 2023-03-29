@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { db } from '@/firebase-init'
 
 axios.defaults.baseURL = 'http://localhost:4001/'
 

@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="text-xs font-semibold">
-                            26
+                            {{ userStore.emails.length }}
                         </div>
                     </div>
                 </router-link>

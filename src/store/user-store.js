@@ -78,6 +78,16 @@ export const useUserStore = defineStore('user', {
             }
         }, 
 
+        async emailHasBeenViewed(id) {
+            try {
+                await setDoc(doc(db, "emails/" + id), {
+                    hasViewed: true
+                }, {merge: true})
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         async deleteEmail(id) {
             try {
                 await deleteDoc(doc(db, "emails", id))

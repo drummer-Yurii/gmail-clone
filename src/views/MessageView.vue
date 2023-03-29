@@ -67,6 +67,8 @@ let email = ref({});
 onMounted(async () => {
   const res = await userStore.getEmailById(route.params.id)
 
+  await userStore.emailHasBeenViewed(res.id)
+
   email.value = {
     id: res.id,
     body: res.body,

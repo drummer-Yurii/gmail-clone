@@ -6,6 +6,7 @@
     <div class="border-b">
       <div class="flex items-center justify-between px-4 my-3">
         <IconComponent
+          @click="deleteSelected"
           class="-m-2 -ml-2.5" 
           iconString="trash"
           iconColor="#636363"
@@ -25,6 +26,7 @@
         :body="email.body"
         time="Jun 20 15:15"
         :hasViewed="email.hasViewed"
+        @selectedId="selectedId"
       />
     </div>
   </div>
@@ -38,7 +40,34 @@ import { onMounted } from 'vue';
 
 const userStore = useUserStore();
 
+let emailsToDelete = [];
+
 onMounted(() => {
   userStore.getEmailsByEmailAddress()
-})
+});
+
+const selectedId = (e) => {
+  if (!emailsToDelete.length) {
+    emailsToDelete.push(e.id)
+  } else if (e.bool && !emailsToDelete.includes(e.id)) {
+    emailsToDelete.push(e.id)
+  } else if (!e.bool && emailsToDelete.includes(e.id)) {
+    const index = emailsToDelete.indexOf(e.id)
+    if (index > -1) {
+      emailsToDelete.splice(index, 1)
+    }
+  }
+}
+
+const deleteSelected = () => {
+  if (!emailsToDelete.length) return
+
+  let res = confirm("Are you sure you want to delete the selected emails?")
+  if (res) {
+    emailsToDelete.forEach(async (id) => {
+      await userStore.deleteEmail(id)
+    })
+    emailsToDelete = []
+  }
+}
 </script>

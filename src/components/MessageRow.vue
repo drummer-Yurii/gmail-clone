@@ -7,7 +7,8 @@
       <div class="flex items-center px-4 py-2">
         <div class="flex items-center">
           <component 
-            :is="CheckboxBlankOutlineIcon" 
+            :is="isSelected ? CheckboxOutlineIcon : CheckboxBlankOutlineIcon" 
+            @click="isSelected = !isSelected"
             :size="19" 
             fillColor="#636363" 
           />
@@ -44,9 +45,14 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from 'vue';
+import { defineProps, toRefs, defineEmits, ref, watch } from 'vue';
 import CheckboxBlankOutlineIcon from 'vue-material-design-icons/CheckboxBlankOutline.vue';
+import CheckboxOutlineIcon from 'vue-material-design-icons/CheckboxOutline.vue';
 import StarOutlineIcon from 'vue-material-design-icons/StarOutline.vue';
+
+const emit = defineEmits(['selectedId']);
+
+let isSelected = ref(false);
 
 const props = defineProps({
   id: String,
@@ -59,7 +65,9 @@ const props = defineProps({
 
 const { from, subject, body, time, id, hasViewed } = toRefs(props); 
 
-// let icon = null;
+watch(isSelected, (bool) => {
+  emit('selectedId', { id: id.value, bool: bool })
+})
 </script>
 
 <style lang="scss">

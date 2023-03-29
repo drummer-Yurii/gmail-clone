@@ -19,10 +19,12 @@
 
     <div v-for="email in userStore.emails" :key="email">
       <MessageRow 
+        :id="email.id"
         :from="email.fromEmail"
         :subject="email.subject"
         :body="email.body"
         time="Jun 20 15:15"
+        :hasViewed="email.hasViewed"
       />
     </div>
   </div>

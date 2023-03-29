@@ -2,6 +2,7 @@
   <div id="MessageRow">
     <div 
       class="border-b hover:border-gray-200 hover:border-t hover:border-y-2 hover:border-x cursor-pointer"
+      :class="[hasViewed ? 'bg-gray-100' : '']"
     >
       <div class="flex items-center px-4 py-2">
         <div class="flex items-center">
@@ -18,7 +19,7 @@
         </div>
 
         <div class="flex items-center w-full">
-          <router-link to="email/message" class="w-full">
+          <router-link :to="`email/message/${id}`" class="w-full">
             <div class="flex items-center justify-between">
               <div class="flex items-center w-full">
                 <div class="text-sm ml-4 font-semibold truncate-from">
@@ -48,13 +49,15 @@ import CheckboxBlankOutlineIcon from 'vue-material-design-icons/CheckboxBlankOut
 import StarOutlineIcon from 'vue-material-design-icons/StarOutline.vue';
 
 const props = defineProps({
+  id: String,
   from: String,
   subject: String,
   body: String,
   time: String,
+  hasViewed: Boolean
 });
 
-const { from, subject, body, time } = toRefs(props); 
+const { from, subject, body, time, id, hasViewed } = toRefs(props); 
 
 // let icon = null;
 </script>

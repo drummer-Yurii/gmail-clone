@@ -17,11 +17,11 @@
       </div>
     </div>
 
-    <div>
+    <div v-for="email in userStore.emails" :key="email">
       <MessageRow 
-        from="john.doe@mail.com"
-        subject="Test row 1"
-        body="this is the body text"
+        :from="email.fromEmail"
+        :subject="email.subject"
+        :body="email.body"
         time="Jun 20 15:15"
       />
     </div>
@@ -31,4 +31,12 @@
 <script setup>
 import IconComponent from '@/components/IconComponent.vue';
 import MessageRow from '@/components/MessageRow.vue';
+import { useUserStore } from '@/store/user-store';
+import { onMounted } from 'vue';
+
+const userStore = useUserStore();
+
+onMounted(() => {
+  userStore.getEmailsByEmailAddress()
+})
 </script>

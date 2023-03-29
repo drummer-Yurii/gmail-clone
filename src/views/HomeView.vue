@@ -21,10 +21,10 @@
     <div v-for="email in userStore.emails" :key="email">
       <MessageRow 
         :id="email.id"
-        :from="email.fromEmail"
+        :from="email.firstName + ' ' + email.lastName"
         :subject="email.subject"
         :body="email.body"
-        time="Jun 20 15:15"
+        :time="email.createdAt"
         :hasViewed="email.hasViewed"
         @selectedId="selectedId"
       />

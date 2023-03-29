@@ -56,6 +56,7 @@
 import IconComponent from '@/components/IconComponent.vue';
 import { useUserStore } from '@/store/user-store';
 import { onMounted, ref } from 'vue';
+import moment from 'moment';
 import { useRouter, useRoute } from 'vue-router';
 
 const userStore = useUserStore();
@@ -72,7 +73,7 @@ onMounted(async () => {
   email.value = {
     id: res.id,
     body: res.body,
-    createdAt: res.createdAt,
+    createdAt: moment(res.createdAt).format("MMM D HH:mm"),
     firstName: res.firstName,
     lastName: res.lastName,
     fromEmail: res.fromEmail,

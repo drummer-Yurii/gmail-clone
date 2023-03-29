@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
-import { collection, query, where, onSnapshot, doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
+import moment from 'moment';
+import { collection, query, where, onSnapshot, doc, setDoc, deleteDoc, getDoc, orderBy } from "firebase/firestore";
 import { db } from '@/firebase-init'
 
 axios.defaults.baseURL = 'http://localhost:4001/'
@@ -17,7 +18,11 @@ export const useUserStore = defineStore('user', {
     }),
     actions: {
         getEmailsByEmailAddress() {
-            const q = query(collection(db, "emails"), where("toEmail", "==", this.$state.email));
+            const q = query(
+                collection(db, "emails"), 
+                where("toEmail", "==", this.$state.email),
+                orderBy('createdAt', 'desc')
+            );
                 onSnapshot(q, (querySnapshot) => {
                 const resultArray = [];
                 querySnapshot.forEach((doc) => {
@@ -30,7 +35,7 @@ export const useUserStore = defineStore('user', {
                         subject: doc.data().subject,
                         body: doc.data().body,
                         hasViewed: doc.data().hasViewed,
-                        createdAt: doc.data().createdAt,
+                        createdAt: moment(doc.data().createdAt).format("MMM D HH:mm"),
                     });
                 });
                 this.$state.emails = resultArray
@@ -113,6 +118,7 @@ export const useUserStore = defineStore('user', {
            this.$state.picture = null
            this.$state.firstName = null
            this.$state.lastName = null
+           this.$state.email = []
        }
     },
     persist: true

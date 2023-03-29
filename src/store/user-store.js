@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', {
     }),
     actions: {
         getEmailsByEmailAddress() {
-            const q = query(collection(db, "emails"), where("toEmail", "==", "john.doe@mail.com"));
+            const q = query(collection(db, "emails"), where("toEmail", "==", this.$state.email));
                 onSnapshot(q, (querySnapshot) => {
                 const resultArray = [];
                 querySnapshot.forEach((doc) => {

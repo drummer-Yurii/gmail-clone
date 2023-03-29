@@ -16,6 +16,7 @@
             />
           </router-link>
           <IconComponent
+            @click="deleteEmail(email.id)"
             iconString="trash"
             iconColor="#636363"
             :iconSize="19"
@@ -29,7 +30,7 @@
     </div>
 
     <div class="w-full text-xl ml-20 font-light pt-5">
-      Subject
+      {{ email.subject }}
     </div>
 
     <div class="w-full flex">
@@ -40,42 +41,52 @@
       <div class="w-full my-4 mx-0.5">
         <div class="font-semibold text-sm mt-4 mb-4">
           <div class="w-full flex justify-between items-center">
-            <div>john.doe@mail.com</div>
-            <div class="mr-5 text-xs font-normal">Jun 20 15:15</div>
+            <div>{{ email.fromEmail }}</div>
+            <div class="mr-5 text-xs font-normal">{{ email.createdAt }}</div>
           </div>
           <span class="text-xs text-gray-500 font-normal">to me</span>
         </div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Architecto eos suscipit a tempora earum vero ullam quaerat omnis facere. 
-            Officia nihil aliquam dignissimos quas molestiae.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Architecto eos suscipit a tempora earum vero ullam quaerat omnis facere. 
-            Officia nihil aliquam dignissimos quas molestiae.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Architecto eos suscipit a tempora earum vero ullam quaerat omnis facere. 
-            Officia nihil aliquam dignissimos quas molestiae.
-        </div>
+        <div>{{ email.body }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// import { defineProps, toRefs } from 'vue';
 import IconComponent from '@/components/IconComponent.vue';
-// import StarOutlineIcon from 'vue-material-design-icons/StarOutline.vue';
+import { useUserStore } from '@/store/user-store';
+import { onMounted, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
-// const props = defineProps({
-//   from: String,
-//   subject: String,
-//   body: String,
-//   time: String,
-// });
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 
-// const { from, subject, body, time } = toRefs(props);
+let email = ref({});
 
-// let icon = null;
+onMounted(async () => {
+  const res = await userStore.getEmailById(route.params.id)
+
+  email.value = {
+    id: res.id,
+    body: res.body,
+    createdAt: res.createdAt,
+    firstName: res.firstName,
+    lastName: res.lastName,
+    fromEmail: res.fromEmail,
+    subject: res.subject,
+    hasViewed: res.hasViewed,
+    toEmail: res.toEmail,
+  }
+})
+
+const deleteEmail = async (id) => {
+  let res = confirm("Are you sure you want to delete this?")
+  if (res) {
+    await userStore.deleteEmail(id)
+    setTimeout(() => { router.push('/email') }, 200)
+  }
+}
 </script>
 
 <style lang="scss">

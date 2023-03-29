@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
-import { collection, query, where, onSnapshot, doc, setDoc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { db } from '@/firebase-init'
 
 axios.defaults.baseURL = 'http://localhost:4001/'
@@ -52,6 +52,35 @@ export const useUserStore = defineStore('user', {
                     hasViewed: false,
                     createdAt: Date.now()
                 });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async getEmailById(id) {
+            const docRef = doc(db, "emails", id)
+            const docSnap = await getDoc(docRef)
+
+            if (docSnap.exists()) {
+                return {
+                    id: id,
+                    firstName: docSnap.data().firstName,
+                    lastName: docSnap.data().lastName,
+                    fromEmail: docSnap.data().fromEmail,
+                    toEmail: docSnap.data().toEmail,
+                    subject: docSnap.data().subject,
+                    body: docSnap.data().body,
+                    hasViewed: docSnap.data().hasViewed,
+                    createdAt: docSnap.data().createdAt,
+                }
+            } else {
+                console.log('No such document');
+            }
+        }, 
+
+        async deleteEmail(id) {
+            try {
+                await deleteDoc(doc(db, "emails", id))
             } catch (error) {
                 console.log(error);
             }
